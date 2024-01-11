@@ -57,7 +57,7 @@ export default {
     collapse: false,
     welcome: '',
     menus: [
-      { path: '/index', icon: 'platform-eleme',index: '首页',have:['管理员,老师,学生']},
+      { path: '/index', icon: 'platform-eleme',menu: '首页',have:['管理员,老师,学生']},
           { index: '课程', icon: 'platform-eleme', children: [
             { path: '/choosesubject', menu: '选课',have:['学生']},
             { path: '/check', menu: '选课查看',have:['学生']},
