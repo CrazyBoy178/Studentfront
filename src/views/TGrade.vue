@@ -3,9 +3,6 @@
     <h1 style="padding: 10px">成绩录入</h1>
     <div class="upload">
       <form action="http://localhost:8080/grade/upload" method="post" enctype="multipart/form-data">
-
-
-        
         <input type="file" name="file">
         <input type="submit" value="上传成绩表">
       </form>
