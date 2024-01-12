@@ -6,7 +6,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import App from './App.vue'
 import Table from './components/Table.vue';
 import Bg from './components/Bg.vue';
-
+import 'animate.css';
 
 var baseURL = 'http://localhost:8080';
 try {

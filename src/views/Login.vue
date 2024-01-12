@@ -1,8 +1,11 @@
 <template>
+  <div>
+<!--    <div ref="vantaRef" style="width: 100%; height: 100vh"></div>-->
   <div class="login-container">
+
     <el-card class="login-card">
       <el-form :model="form" v-show="!is_registration" label-width="60px" class="login-form" v-if="!is_registration">
-        <h3 class="login-title" >登录</h3>
+        <h3 class="login-title" >学生成绩管理系统登录</h3>
         <el-form-item label="账号" >
           <el-input prefix-icon="el-icon-user-solid" v-model="form.username" placeholder="请输入用户名"></el-input>
         </el-form-item>
@@ -14,6 +17,7 @@
           <el-button type="primary" v-if="!is_registration" @click="toggleInputs()">注册</el-button>
         </el-form-item>
       </el-form>
+
 
       <el-form :model="ruleForm" v-show="is_registration" status-icon label-width="60px" class="login-form" :rules="rules" ref="ruleForm" >
         <h3 class = login-title >注册</h3>
@@ -38,13 +42,17 @@
         </el-form-item>
       </el-form>
 
-
     </el-card>
+    </div>
   </div>
+
 </template>
 
 
 <script>
+import * as THREE from 'three'//导入样式
+import WAVES from "vanta/src/vanta.waves"//导入动态样式逻辑
+
 import {passwordCheck} from '@/assets/pwdCheck';
 export default {
   data() {
@@ -153,6 +161,7 @@ export default {
     },
 
     toggleInputs() {
+
         this.is_registration = !this.is_registration;
         this.form.username = ''
         this.form.password = ''
@@ -210,24 +219,61 @@ export default {
           return false;
         }
     },
-  }
+  },
+  mounted() {
+    this.vantaEffect = WAVES({
+      el: this.$refs.vantaRef,
+      THREE: THREE,
+    });
+    VANTA.WAVES({
+      el: this.$refs.vantaRef,
+      /*以下为样式配置*/
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.0,
+      minWidth: 200.0,
+      scale: 1.0,
+      scaleMobile: 1.0,
+      color: 0x5f88,
+      shininess: 76.0,
+      waveHeight: 12.0,
+      waveSpeed: 0.95,
+      zoom: 0.89,
+    });
+
+  },
+  beforeDestroy() {
+    if (this.vantaEffect) {
+      this.vantaEffect.destroy();
+    }
+  },
+
 }
 </script>
 
 <style scoped>
 .login-container {
-  background-image: url('../../public/orange.png');
-  background-size: cover;
-  background-position: center;
+  //background-image: url('../../public/orange.png');
+  //background-size: cover;
+  //background-position: center;
   display: flex;
   height: 100vh;
   justify-content: center;
   align-items: center;
-}
-.login-card {
-  width: 450px;
+  .login-card {
+    border-radius: 20px;
+    width: 450px;
+    animation: zoomIn;
+    animation-duration: 1s;
 
+  }
 }
+
+
+
+
+
 .login-form {
   margin-top: 40px;
 }

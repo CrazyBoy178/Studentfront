@@ -1,3 +1,4 @@
+
 <template>
   <div id="app">
     <div class="left-menu" v-show="index&&index!=='/'&&index!=='/login'">
@@ -20,7 +21,8 @@
             <span>展开</span>
           </el-menu-item>
         </el-submenu>
-        <el-submenu v-for="item in menus" :index="item.index">
+        <el-submenu v-for="item in menus" :index="item.index"
+                    v-if="!(item.have)||(item.have).indexOf(status)!==-1">
           <template slot="title">
             <i :class="'el-icon-'+item.icon"></i>
             <span>{{item.index}}</span>
@@ -28,7 +30,7 @@
           <el-menu-item :index="bean.path"
                         v-if="!(bean.have)||(bean.have).indexOf(status)!==-1"
                         v-for="bean in item.children">
-            <i class="el-icon-menu"></i>
+            <i :class="bean.icon"></i>
             <span>{{bean.menu}}</span>
           </el-menu-item>
         </el-submenu>
@@ -57,21 +59,21 @@ export default {
     collapse: false,
     welcome: '',
     menus: [
-      { path: '/index', icon: 'platform-eleme',menu: '首页',have:['管理员,老师,学生']},
-          { index: '课程', icon: 'platform-eleme', children: [
-            { path: '/choosesubject', menu: '选课',have:['学生']},
-            { path: '/check', menu: '选课查看',have:['学生']},
-            { path: '/grade', menu: '成绩查询',have:['学生']},
+      //{ path: '/index', icon: 'platform-eleme',menu: '首页',have:['管理员,老师,学生']},
+          { index: '课程管理', icon: 'el-icon-notebook-2', have:['学生'],children: [
+            { path: '/choosesubject', icon: 'el-icon-notebook-2',menu: '选课',have:['学生']},
+            { path: '/check', icon: 'el-icon-notebook-2',menu: '选课查看',have:['学生']},
+            { path: '/grade', icon: 'el-icon-notebook-2',menu: '成绩查询',have:['学生']},
         ]},
-          { index: '医生', icon: 'platform-eleme', children: [
-              { path: '/tgrade', menu: '成绩录入',have:['老师']},
-              { path: '/chart', menu: '成绩分析',have:['老师']}
+          { index: '成绩管理', icon: 'el-icon-trophy',have:['老师'], children: [
+              { path: '/tgrade',icon: 'el-icon-reading', menu: '成绩录入',have:['老师']},
+              { path: '/chart', icon: 'el-icon-data-analysis',menu: '成绩分析',have:['老师']}
         ]},
-          { index: '信息管理', icon: 'setting', children: [
-              { path: '/user', menu: '人员管理',have:['管理员']},
-              { path: '/subject', menu: '课程管理',have:['管理员']},
-              { path: '/college', menu: '学院管理',have:['管理员']},
-              { path: '/getsubject', menu: '选课管理',have:['管理员']},
+          { index: '信息管理', icon: 'setting', have:['管理员'],children: [
+              { path: '/user',icon: 'el-icon-user', menu: '人员管理',have:['管理员']},
+              { path: '/subject',icon: 'el-icon-collection', menu: '课程管理',have:['管理员']},
+              { path: '/college', icon: 'el-icon-school',menu: '学院管理',have:['管理员']},
+              { path: '/getsubject', icon: 'el-icon-notebook-1',menu: '选课管理',have:['管理员']},
         ]},
     ],
     index: '',
